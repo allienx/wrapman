@@ -1,0 +1,10 @@
+.custom_repl_history
+.DS_Store
+.env*local
+
+.idea/
+
+dist/
+node_modules/
+
+npm-debug.log*

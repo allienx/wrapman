@@ -1,0 +1,14 @@
+.custom_repl_history
+.DS_Store
+.env*local
+.nvmrc
+.prettierignore
+
+.idea/
+
+dist/
+node_modules/
+
+*.ts
+npm-debug.log*
+prettier.config.cjs

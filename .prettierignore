@@ -1,0 +1,12 @@
+.custom_repl_history
+.DS_Store
+.env*local
+.nvmrc
+
+.idea/
+
+dist/
+node_modules/
+
+npm-debug.log*
+prettier.config.cjs

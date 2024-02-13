@@ -1,0 +1,34 @@
+{
+  "name": "wrapman",
+  "version": "0.0.1",
+  "description": "Postman API request collection wrapper that generates a predictable http client.",
+  "keywords": [
+    "postman",
+    "collection",
+    "api",
+    "http",
+    "requests"
+  ],
+  "main": "index.js",
+  "author": "Alex Lin",
+  "license": "ISC",
+  "homepage": "https://github.com/allienx/wrapman#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/allienx/wrapman.git"
+  },
+  "bugs": {
+    "url": "https://github.com/allienx/wrapman/issues"
+  },
+  "scripts": {
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "20.11.17",
+    "prettier": "3.2.5",
+    "ts-node": "10.9.2",
+    "tsconfig-paths": "4.2.0",
+    "typescript": "5.3.3"
+  }
+}
