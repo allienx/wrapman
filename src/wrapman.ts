@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { flattenCollectionRequestItem } from 'src/postman/flatten-collection-request-item'
+import { WrapmanCollection } from 'src/wrapman-collection'
 
 interface WrapmanProps {
   collectionPath: string
@@ -39,7 +40,7 @@ export class Wrapman {
     const { collection } = this.collectionJson || {}
     const items = collection?.item || []
 
-    const flattenedCollection = {
+    const flattenedCollection: WrapmanCollection = {
       name: collection?.info.name,
       items: items
         .map(flattenCollectionRequestItem)
