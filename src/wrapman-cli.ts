@@ -10,7 +10,7 @@ runIt({
       .name('wrapman')
       .version('0.0.1')
       .description(
-        'Postman API request collection wrapper that generates a predictable http client.',
+        'Postman API request collection wrapper that generates an axios http client.',
       )
 
     program
@@ -28,10 +28,10 @@ runIt({
         const collection = await new Wrapman({
           collectionPath: options.input,
         }).flatten({
-          destPath: options.destination,
+          destPath: options.dest,
         })
 
-        if (!options.destination) {
+        if (!options.dest) {
           process.stdout.write(JSON.stringify(collection))
         }
       })

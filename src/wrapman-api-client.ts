@@ -36,7 +36,7 @@ export class WrapmanApiClient {
     this.vars = vars
   }
 
-  async send(
+  async request(
     id: string,
     {
       ignorePrefix,
@@ -68,24 +68,20 @@ export class WrapmanApiClient {
       },
     })
 
-    try {
-      const res = await axios.request({
-        method: collectionItem.method,
-        url,
-        headers: {
-          ...this.headers,
-          ...headers,
-        },
-        params: {
-          ...this.params,
-          ...params,
-        },
-        ...config,
-      })
+    const res = await axios.request({
+      method: collectionItem.method,
+      url,
+      headers: {
+        ...this.headers,
+        ...headers,
+      },
+      params: {
+        ...this.params,
+        ...params,
+      },
+      ...config,
+    })
 
-      return res
-    } catch (err) {
-      return err
-    }
+    return res
   }
 }

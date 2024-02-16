@@ -64,7 +64,7 @@ export class Wrapman {
 
       await mkdir(destPath, { recursive: true })
 
-      await writeFile(outputPath, JSON.stringify(flattenedCollection, null, 2))
+      await writeFile(outputPath, JSON.stringify(flattenedCollection))
     }
 
     return flattenedCollection
