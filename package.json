@@ -1,7 +1,7 @@
 {
   "name": "wrapman",
   "version": "0.0.1",
-  "description": "Postman API request collection wrapper that generates an axios http client.",
+  "description": "Postman API request collection wrapper that generates an axios http client 🎁",
   "keywords": [
     "postman",
     "collection",
@@ -30,7 +30,7 @@
     "repl": "ts-node custom-repl.ts",
     "dev:cli": "ts-node src/wrapman-cli.ts",
     "build": "tsc",
-    "clean": "rimraf -g \"src/**/*{.js,.d.ts,.d.ts.map}\""
+    "clean": "rimraf -g index.d* index.js \"src/**/*{.js,.d.ts,.d.ts.map}\""
   },
   "dependencies": {
     "axios": "1.6.7",

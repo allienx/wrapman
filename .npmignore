@@ -11,4 +11,5 @@ node_modules/
 
 *.ts
 npm-debug.log*
-prettier.config.cjs
+prettier.config.js
+tsconfig.json
