@@ -10,7 +10,7 @@ runIt({
 
     program
       .name('wrapman')
-      .version('1.0.1')
+      .version('1.0.2')
       .description(
         'Postman API request collection wrapper that generates an axios http client.',
       )
