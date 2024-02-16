@@ -10,7 +10,7 @@ interface WrapmanApiClientProps {
   vars?: Record<string, string>
 }
 
-interface WrapmanApiClientSendConfig extends AxiosRequestConfig {
+interface WrapmanApiClientSendConfig<B> extends AxiosRequestConfig<B> {
   ignorePrefix?: boolean
   vars?: Record<string, string>
 }
@@ -36,7 +36,7 @@ export class WrapmanApiClient {
     this.vars = vars
   }
 
-  async request(
+  async request<D, B>(
     id: string,
     {
       ignorePrefix,
@@ -44,7 +44,7 @@ export class WrapmanApiClient {
       headers,
       params,
       ...config
-    }: WrapmanApiClientSendConfig,
+    }: WrapmanApiClientSendConfig<B>,
   ) {
     const itemId = this.prefix && !ignorePrefix ? `${this.prefix}::${id}` : id
     const collectionItem = this.collection.items.find((item) => {
@@ -52,11 +52,9 @@ export class WrapmanApiClient {
     })
 
     if (!collectionItem) {
-      console.log(
+      throw new Error(
         `No request '${id}' found! Check that it exists in your postman collection or regenerate the wrapman collection.`,
       )
-
-      return
     }
 
     const url = getRequestUrl({
@@ -68,7 +66,7 @@ export class WrapmanApiClient {
       },
     })
 
-    const res = await axios.request({
+    const res = await axios.request<D>({
       method: collectionItem.method,
       url,
       headers: {

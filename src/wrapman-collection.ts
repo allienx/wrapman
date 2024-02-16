@@ -6,6 +6,6 @@ export interface WrapmanCollection {
 export interface WrapmanCollectionItem {
   id: string
   name: string
-  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS'
+  method: string
   url: string
 }

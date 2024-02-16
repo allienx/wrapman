@@ -5,7 +5,7 @@ import path from 'node:path'
 import repl from 'node:repl'
 import { Wrapman } from 'src/wrapman'
 import { WrapmanApiClient } from 'src/wrapman-api-client'
-import wrapmanJson from './dist/wrapman.json'
+import wrapmanJson from './wrapman.json'
 
 console.log(new Date().toString())
 console.log(`\n=== Custom REPL initialized ===\n`)
