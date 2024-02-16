@@ -22,7 +22,7 @@
     "target": "ES2020"
   },
   "include": [
-    "dist/src/**/*"
+    "src/**/*"
   ],
   "ts-node": {
     "require": ["tsconfig-paths/register"]

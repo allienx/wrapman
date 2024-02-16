@@ -29,7 +29,8 @@
     "format:fix": "prettier --write .",
     "repl": "ts-node custom-repl.ts",
     "dev:cli": "ts-node src/wrapman-cli.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "clean": "rimraf -g \"src/**/*{.js,.d.ts,.d.ts.map}\""
   },
   "dependencies": {
     "axios": "1.6.7",
@@ -40,6 +41,7 @@
     "@types/lodash": "4.14.202",
     "@types/node": "20.11.17",
     "prettier": "3.2.5",
+    "rimraf": "5.0.5",
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.3.3"
