@@ -11,7 +11,7 @@ npm i wrapman
 npx wrapman -i path/to/postman-collection.json -d data
 ```
 
-Import the flattened JSON file and initialize an API client
+Import the flattened JSON file and initialize an API client.
 
 ```js
 import { WrapmanApiClient } from 'wrapman'
@@ -45,7 +45,7 @@ const flattenedJson = await wrapman.flatten()
 
 ## Request IDs
 
-Given a postman collection like the [Pet Store](https://www.postman.com/schude/workspace/petstore/collection/14574125-2e916d97-e26f-42d5-a20d-4b34b25498f8)
+Given a postman collection like the [Pet Store](https://www.postman.com/schude/workspace/petstore/collection/14574125-2e916d97-e26f-42d5-a20d-4b34b25498f8):
 
 ```
 Pet Store Collection/
@@ -58,7 +58,7 @@ Pet Store Collection/
     Get Pet After Delete
 ```
 
-Wrapman will generate an API client with request IDs that mimic the collection folder hierarchy, joined by `::`.
+Wrapman will generate an API client with request IDs that mimic the collection folder hierarchy, joined by `::`
 
 ```js
 await apiClient.request('Pet Store Collection::Pet::Create Pet', {
