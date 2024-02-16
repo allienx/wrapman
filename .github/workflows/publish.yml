@@ -1,0 +1,40 @@
+name: publish
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  publish-tag-and-release:
+    if: ${{ startsWith(github.head_ref, 'release-') && github.event.pull_request.merged == true }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.11.0'
+
+      - id: publish
+        uses: JS-DevTools/npm-publish@v3
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+
+      - if: ${{ steps.publish.outputs.type }}
+        name: Get release version
+        uses: xom9ikk/split@v1.1
+        id: split
+        with:
+          string: ${{ github.head_ref }}
+          separator: 'release-'
+
+      - if: ${{ steps.publish.outputs.type }}
+        name: Create tag and release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ steps.split.outputs._1 }}
+          tag_name: ${{ steps.split.outputs._1 }}
+          target_commitish: main
+          generate_release_notes: true
