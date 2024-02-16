@@ -12,7 +12,7 @@
   ],
   "main": "index.js",
   "bin": {
-    "wrapman": "./src/wrapman-cli.js"
+    "wrapman": "src/wrapman-cli.js"
   },
   "author": "Alex Lin",
   "license": "ISC",
