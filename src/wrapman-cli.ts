@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from 'commander'
 import { runIt } from 'src/utils/run-it'
 import { Wrapman } from 'src/wrapman'
@@ -8,7 +10,7 @@ runIt({
 
     program
       .name('wrapman')
-      .version('1.0.1')
+      .version('1.0.2')
       .description(
         'Postman API request collection wrapper that generates an axios http client.',
       )
