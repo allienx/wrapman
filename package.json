@@ -11,6 +11,9 @@
     "requests"
   ],
   "main": "index.js",
+  "bin": {
+    "wrapman": "./src/wrapman-cli.js"
+  },
   "author": "Alex Lin",
   "license": "ISC",
   "homepage": "https://github.com/allienx/wrapman#readme",
@@ -25,7 +28,8 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "repl": "ts-node custom-repl.ts",
-    "dev:cli": "ts-node src/wrapman-cli.ts"
+    "dev:cli": "ts-node src/wrapman-cli.ts",
+    "build": "tsc"
   },
   "dependencies": {
     "axios": "1.6.7",
