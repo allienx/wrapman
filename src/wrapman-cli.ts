@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from 'commander'
 import { runIt } from 'src/utils/run-it'
 import { Wrapman } from 'src/wrapman'
