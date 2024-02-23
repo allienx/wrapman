@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { WrapmanCollection } from 'src/wrapman-collection'
-import { getRequestUrl } from 'src/postman/get-request-url'
 
 interface WrapmanApiClientProps {
   collection: WrapmanCollection
@@ -36,6 +35,42 @@ export class WrapmanApiClient {
     this.vars = vars
   }
 
+  getRequestUrl({
+    id,
+    url,
+    vars,
+  }: {
+    id: string
+    url: string
+    vars: Record<string, string>
+  }) {
+    return url
+      .split('/')
+      .map((str) => {
+        // Replace any dynamic path variables in the postman url.
+        //
+        // Example:
+        //   Request url: {{baseUrl}}/v1/locations/{{location_id}}
+        //   This will try to find 'baseUrl' and 'location_id' values on the parameters object.
+        if (str.startsWith('{{') && str.endsWith('}}')) {
+          const envVar = str.replace(/[{}]/g, '')
+          const paramValue = vars[envVar]
+
+          if (!paramValue) {
+            console.log('Missing path variable replacement!')
+            console.log(`Request: ${id}`)
+            console.log(`URL: ${url}`)
+            console.log(`Var: ${envVar}`)
+          }
+
+          return paramValue
+        }
+
+        return str
+      })
+      .join('/')
+  }
+
   async request<D, B>(
     id: string,
     {
@@ -44,7 +79,7 @@ export class WrapmanApiClient {
       headers,
       params,
       ...config
-    }: WrapmanApiClientSendConfig<B>,
+    }: WrapmanApiClientSendConfig<B> = {},
   ) {
     const itemId = this.prefix && !ignorePrefix ? `${this.prefix}::${id}` : id
     const collectionItem = this.collection.items.find((item) => {
@@ -53,11 +88,11 @@ export class WrapmanApiClient {
 
     if (!collectionItem) {
       throw new Error(
-        `No request '${id}' found! Check that it exists in your postman collection or regenerate the wrapman collection.`,
+        `No request '${id}' found! Check that it exists in your source collection or regenerate the wrapman collection.`,
       )
     }
 
-    const url = getRequestUrl({
+    const url = this.getRequestUrl({
       id,
       url: collectionItem.url,
       vars: {

@@ -10,17 +10,19 @@ runIt({
 
     program
       .name('wrapman')
-      .version('1.0.4')
+      .version('1.1.0')
       .description(
-        'Postman API request collection wrapper that generates an axios http client.',
+        'API request collection wrapper that generates an axios http client.',
       )
 
     program
       .command('flatten', { isDefault: true })
+
       .requiredOption(
-        '-i, --input <file>',
-        'the exported postman collection json file',
+        '-i, --input <path>',
+        'the path to the exported collection json',
       )
+      .option('--url', 'treat the input path as a URL to fetch')
       .option(
         '-d, --dest <destination>',
         'directory to output the JSON collection files to',
@@ -29,6 +31,7 @@ runIt({
       .action(async (options) => {
         const collection = await new Wrapman({
           collectionPath: options.input,
+          isPathUrl: !!options.url,
         }).flatten({
           destPath: options.dest,
         })
