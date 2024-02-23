@@ -9,6 +9,9 @@ npm i wrapman
 
 # Generate a flattened JSON file
 npx wrapman -i path/to/postman-collection.json -d data
+
+# Read the source collection from a URL
+npx wrapman -i https://api.com/my/collection/json --url -d data
 ```
 
 Import the flattened JSON file and initialize an API client.
