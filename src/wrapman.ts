@@ -5,19 +5,36 @@ import { WrapmanCollection } from 'src/wrapman-collection'
 
 interface WrapmanProps {
   collectionPath: string
+  isPathUrl?: boolean
 }
 
 export class Wrapman {
   collectionPath: string
   collectionJson: Record<string, any> | null
+  isPathUrl: boolean
 
-  constructor({ collectionPath }: WrapmanProps) {
+  constructor({ collectionPath, isPathUrl = false }: WrapmanProps) {
     this.collectionPath = collectionPath
     this.collectionJson = null
+    this.isPathUrl = isPathUrl
   }
 
   async readCollectionJson() {
     if (this.collectionJson) {
+      return
+    }
+
+    if (this.isPathUrl) {
+      try {
+        this.collectionJson = await fetch(this.collectionPath).then((res) => {
+          return res.json()
+        })
+      } catch (err) {
+        console.error(err)
+
+        this.collectionJson = null
+      }
+
       return
     }
 
@@ -46,15 +63,20 @@ export class Wrapman {
         .map(flattenCollectionRequestItem)
         .flat(10)
         .map((item: any) => {
-          const { request } = item
-          const host = request.url.host.join('/')
-          const path = request.url.path.join('/')
+          const { url, method } = item.request
+          const protocol = url.protocol || ''
+          const host = url.host.join('.')
+          const path = url.path.join('/')
+
+          const resolvedUrl = protocol
+            ? `${protocol}://${host}/${path}`
+            : `${host}/${path}`
 
           return {
             id: item.wrapmanId,
             name: item.name,
-            method: request.method,
-            url: `${host}/${path}`,
+            method,
+            url: resolvedUrl,
           }
         }),
     }
