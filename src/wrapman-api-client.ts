@@ -71,7 +71,7 @@ export class WrapmanApiClient {
       .join('/')
   }
 
-  async request<D, B>(
+  async request<D = any, B = any>(
     id: string,
     {
       ignorePrefix,
